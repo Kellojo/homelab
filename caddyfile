@@ -1,0 +1,12 @@
+localhost {
+	reverse_proxy homer:80
+
+    handle_path /pihole* {
+        reverse_proxy pihole:6001 {
+            transport http {
+                tls_insecure_skip_verify
+            }
+        }
+    }
+
+}
