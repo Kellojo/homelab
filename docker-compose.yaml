@@ -1,7 +1,14 @@
-networks:
-  proxy-network:
-
 services:
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - 6003:9443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./services/portainer/data:/data
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
@@ -15,14 +22,12 @@ services:
     container_name: caddy
     restart: unless-stopped
     ports:
-      - 80:80
-      - 443:443
+      - 6001:80 # HTTP
+      - 6002:443 # HTTPS
     volumes:
       - ./caddyfile:/etc/caddy/Caddyfile:ro
       - ./services/caddy/data:/data
       - ./services/caddy/config:/config
-    networks:
-      - proxy-network
 
   homer:
     image: b4bz/homer
@@ -32,8 +37,6 @@ services:
       - 8080:8080
     volumes:
       - ./services/homer/assets:/www/assets
-    networks:
-      - proxy-network
 
   pihole:
     image: pihole/pihole:latest
@@ -45,19 +48,17 @@ services:
     ports:
       - 53:53/tcp
       - 53:53/udp
-      - 6001:443
+      - 6004:443
     volumes:
       - ./services/pihole/etc-pihole:/etc/pihole
       - ./services/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
-    networks:
-      - proxy-network
 
   uptime-kuma:
     image: louislam/uptime-kuma
     container_name: uptime-kuma
     restart: unless-stopped
     ports:
-      - 6002:3001
+      - 6005:3001
     volumes:
       - ./services/uptime-kuma/data:/app/data
 
@@ -66,6 +67,6 @@ services:
     container_name: vaultwarden
     restart: unless-stopped
     ports:
-      - 6003:80
+      - 6006:80
     volumes:
       - ./services/vaultwarden/data:/data
