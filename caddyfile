@@ -1,3 +1,4 @@
-* {
+https://localhost:6002 {
+    tls internal
     respond "Hello from Caddy"
 }
