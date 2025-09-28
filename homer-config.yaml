@@ -1,0 +1,92 @@
+---
+# Homepage configuration
+# See https://fontawesome.com/search for icons options
+
+# Optional: Use external configuration file.
+# Using this will ignore remaining config in this file
+# externalConfig: https://example.com/server-luci/config.yaml
+
+title: "Nashor Dashboard"
+subtitle: "Locally hosted"
+
+header: true # Set to false to hide the header
+
+columns: "3"
+connectivityCheck: true
+
+defaults:
+  layout: columns
+  colorTheme: auto
+
+theme: default
+
+# Here is the exhaustive list of customization parameters
+# However all value are optional and will fallback to default if not set.
+# if you want to change only some of the colors, feel free to remove all unused key.
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#424242"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+    background-image: "/assets/your/light/bg.png" # prefix with your sub subpath if any (ex: /homer/assets/...)
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+    background-image: "/assets/your/dark/bg.png" # prefix with your sub subpath if any (ex: /homer/assets/...)
+
+# Services
+# First level array represents a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "Apps"
+    icon: "fas fa-code-branch"
+    items:
+      - name: NAS
+        logo: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/synology-dsm.png
+        url: https://nashor.home
+
+      - name: Synology Photos
+        logo: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/synology-photos.png
+        url: https://nashor.home/?launchApp=SYNO.Foto.AppInstance
+
+      - name: Vaultwarden
+        logo: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/bitwarden.png
+        url: "https://vaultwarden.nashor.home:6002"
+
+  - name: "Services"
+    icon: "fas fa-code-branch"
+    items:
+      - name: "Pi Hole"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pi-hole.png"
+        url: "https://pihole.nashor.home:6002/admin"
+
+      - name: Uptime Kuma
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/uptime-kuma.png"
+        url: https://status.nashor.home:6002
+
+      - name: Portainer
+        logo: https://cdn-icons-png.flaticon.com/128/6260/6260181.png
+        url: "https://portainer.nashor.home:6002"
+
+      - name: Homebridge
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/homebridge.png"
+        url: "https://homebridge.nashor.home:6002"

@@ -1,6 +1,6 @@
 services:
   portainer:
-    image: portainer/portainer-ce
+    image: portainer/portainer-ce:latest
     container_name: portainer
     restart: unless-stopped
     ports:
@@ -10,7 +10,7 @@ services:
       - ./services/portainer/data:/data
 
   watchtower:
-    image: containrrr/watchtower
+    image: containrrr/watchtower:latest
     container_name: watchtower
     restart: unless-stopped
     volumes:
@@ -18,7 +18,7 @@ services:
     command: --cleanup --interval 300
 
   caddy:
-    image: caddy
+    image: caddy:latest
     container_name: caddy
     restart: unless-stopped
     ports:
@@ -30,13 +30,14 @@ services:
       - ./services/caddy/config:/config
 
   homer:
-    image: b4bz/homer
+    image: b4bz/homer:latest
     container_name: homer
     restart: unless-stopped
     ports:
       - 8080:8080
     volumes:
       - ./services/homer/assets:/www/assets
+      - ./homer-config.yaml:/www/assets/config.yml:ro
 
   pihole:
     image: pihole/pihole:latest
@@ -53,13 +54,14 @@ services:
       - ./services/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
 
   uptime-kuma:
-    image: louislam/uptime-kuma
+    image: louislam/uptime-kuma:latest
     container_name: uptime-kuma
     restart: unless-stopped
     ports:
       - 6005:3001
     volumes:
       - ./services/uptime-kuma/data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
 
   vaultwarden:
     image: vaultwarden/server:latest
